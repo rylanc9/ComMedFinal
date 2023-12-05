@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,13 @@ public class PlayerMovement : MonoBehaviour
         m_AudioSource = GetComponent<AudioSource> ();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Stamina.instance.UseStamina(1);
+        }
+    }
     void FixedUpdate ()
     {
         float horizontal = Input.GetAxis ("Horizontal");
@@ -51,7 +59,9 @@ public class PlayerMovement : MonoBehaviour
     void OnAnimatorMove ()
     {
         if (Input.GetKey(KeyCode.LeftShift))
-            m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude * 2);
+        {
+                m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude * 2);
+        }
         else
             m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
 
